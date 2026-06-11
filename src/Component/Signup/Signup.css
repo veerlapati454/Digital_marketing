@@ -1,0 +1,173 @@
+.signup-page {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #eff6ff,
+    #dbeafe
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 20px 60px;
+}
+
+.signup-card {
+  width: 100%;
+  max-width: 550px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.signup-card h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.signup-subtitle {
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  transition: .3s;
+}
+
+.input-group input:focus {
+  border-color: #2563eb;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 50px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.signup-btn {
+  width: 100%;
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.signup-btn:hover {
+  background: #1d4ed8;
+}
+
+.divider {
+  text-align: center;
+  margin: 25px 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 42%;
+  height: 1px;
+  background: #cbd5e1;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.divider span {
+  background: #fff;
+  padding: 0 12px;
+  color: #64748b;
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-btn {
+  border: 1px solid #cbd5e1;
+  background: white;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.social-btn:hover {
+  background: #f8fafc;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.login-link a {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+
+  .signup-card {
+    padding: 25px;
+  }
+
+  .signup-card h1 {
+    font-size: 1.7rem;
+  }
+}
