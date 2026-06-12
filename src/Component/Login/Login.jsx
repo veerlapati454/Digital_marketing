@@ -29,7 +29,6 @@ function Login() {
 
     localStorage.setItem("role", role);
 
-    alert(`${role.toUpperCase()} Login Successful`);
 
     if (role === "admin") {
       navigate("/admin-dashboard");

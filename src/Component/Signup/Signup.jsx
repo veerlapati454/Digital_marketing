@@ -15,6 +15,7 @@ function Signup() {
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,12 +33,26 @@ function Signup() {
     setUsername(value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleEmailChange = (e) => {
+    const value = e.target.value.trim();
+
+    setEmail(value);
 
     const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
-    if (!gmailRegex.test(email)) {
+    if (value === "") {
+      setEmailError("");
+    } else if (!gmailRegex.test(value)) {
+      setEmailError("Please enter a valid Gmail address");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (emailError) {
       alert("Please enter a valid Gmail address");
       return;
     }
@@ -68,13 +83,11 @@ function Signup() {
     }
 
     alert("Account Created Successfully");
-
     navigate("/login");
   };
 
   return (
     <div className="signup-page">
-
       <div className="signup-card">
 
         <Link to="/" className="back-btn">
@@ -84,9 +97,7 @@ function Signup() {
 
         <h1>Create Account</h1>
 
-        <p className="signup-subtitle">
-          Join DigiMax and grow your business online.
-        </p>
+        
 
         <form onSubmit={handleSubmit}>
 
@@ -121,9 +132,16 @@ function Signup() {
               type="email"
               placeholder="example@gmail.com"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
+              className={emailError ? "error" : ""}
               required
             />
+
+            {emailError && (
+              <span className="error-message">
+                {emailError}
+              </span>
+            )}
           </div>
 
           <div className="input-group">
@@ -204,7 +222,6 @@ function Signup() {
         </p>
 
       </div>
-
     </div>
   );
 }

@@ -22,6 +22,7 @@
 
 .back-btn {
   display: inline-flex;
+  text-decoration: none;
   align-items: center;
   gap: 6px;
   color: #2563eb;
@@ -178,6 +179,8 @@
 .signup-link a {
   color: #2563eb;
   font-weight: 600;
+    text-decoration: none;
+
 }
 
 @media (max-width: 600px) {
