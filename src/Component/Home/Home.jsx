@@ -22,6 +22,7 @@ import {
 } from "react-icons/fa";
 import "./Home.css";
 import hero from "../../assets/h6.webp";
+import { useNavigate } from "react-router-dom";
 
 /* ─── Scroll reveal hook ─── */
 function useScrollReveal(threshold = 0.15) {
@@ -82,6 +83,11 @@ function Home() {
   const [priceRef, priceVisible] = useScrollReveal(0.1);
   const [faqRef, faqVisible] = useScrollReveal(0.1);
   const [statsRef, statsVisible] = useScrollReveal(0.1);
+  const navigate = useNavigate();
+
+const goTo404 = () => {
+  navigate("/404");
+};
 
   return (
     <>
@@ -118,10 +124,10 @@ function Home() {
           </p>
 
           <div className="hero-buttons">
-            <button className="primary-btn">
+            <button className="primary-btn" onClick={goTo404}>
               Start Growing <FaArrowRight />
             </button>
-            <button className="ghost-btn ghost-btn--light">
+            <button className="ghost-btn ghost-btn--light" onClick={goTo404}>
               <FaPlay /> Watch Our Story
             </button>
           </div>
@@ -193,7 +199,12 @@ function Home() {
               { icon: <FaRocket />,    title: "Conversion Optimisation", desc: "A/B tests, heatmaps, and UX audits that squeeze more revenue from the traffic you already have.",                                        color: "amber"   },
               { icon: <FaLightbulb />, title: "Brand Strategy",          desc: "Positioning, messaging frameworks, and visual identity that make you unmistakable in a crowded market.",                                 color: "rose"    },
             ].map((s, i) => (
-              <div key={i} className={`service-card service-card--${s.color}`}>
+              <div
+  key={i}
+  className={`service-card service-card--${s.color}`}
+  onClick={goTo404}
+  style={{ cursor: "pointer" }}
+>
                 <div className="service-icon">{s.icon}</div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
@@ -364,7 +375,7 @@ function Home() {
                     <li key={fi}><FaCheck /> {f}</li>
                   ))}
                 </ul>
-                <button className={p.badge ? "primary-btn" : "outline-btn"}>{p.cta}</button>
+                <button className={p.badge ? "primary-btn" : "outline-btn"} onClick={goTo404}>{p.cta}</button>
               </div>
             ))}
           </div>
@@ -401,7 +412,7 @@ function Home() {
           <h2>Your competitors aren't waiting.<br />Neither should you.</h2>
           <p>Book a free 30-minute strategy call. No pitch, just a plan.</p>
           <div className="cta-actions">
-            <button className="primary-btn primary-btn--large">
+            <button className="primary-btn primary-btn--large" onClick={goTo404}>
               Book Free Strategy Call <FaArrowRight />
             </button>
             <p className="cta-footnote">No credit card required · Cancel anytime</p>

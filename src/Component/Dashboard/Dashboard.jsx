@@ -19,57 +19,56 @@ import {
   FaCheckCircle,
   FaClock,
   FaExclamationCircle,
-  FaUserCircle,
 } from "react-icons/fa";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/stackly.webp"
+import logo from "../../assets/stackly.webp";
 
 /* ─── NAV ITEMS ─── */
 const navItems = [
-  { icon: <FaHome />,      label: "Overview",    id: "overview" },
-  { icon: <FaBullhorn />,  label: "Campaigns",   id: "campaigns" },
-  { icon: <FaUsers />,     label: "Leads",       id: "leads" },
-  { icon: <FaChartLine />, label: "Analytics",   id: "analytics" },
-  { icon: <FaEnvelope />,  label: "Email",       id: "email" },
-  { icon: <FaFileAlt />,   label: "Reports",     id: "reports" },
-  { icon: <FaCogs />,      label: "Settings",    id: "settings" },
+  { icon: <FaHome />,      label: "Overview",  id: "overview" },
+  { icon: <FaBullhorn />,  label: "Campaigns", id: "campaigns" },
+  { icon: <FaUsers />,     label: "Leads",     id: "leads" },
+  { icon: <FaChartLine />, label: "Analytics", id: "analytics" },
+  { icon: <FaEnvelope />,  label: "Email",     id: "email" },
+  { icon: <FaFileAlt />,   label: "Reports",   id: "reports" },
+  { icon: <FaCogs />,      label: "Settings",  id: "settings" },
 ];
 
 /* ─── CAMPAIGNS DATA ─── */
 const campaigns = [
-  { name: "Google Ads — Q3 Drive",     status: "active",  leads: 312, budget: "$1,200", ctr: "4.8%" },
-  { name: "Facebook Lead Gen",          status: "active",  leads: 188, budget: "$800",  ctr: "3.2%" },
-  { name: "Instagram Brand Awareness",  status: "paused",  leads: 95,  budget: "$500",  ctr: "2.1%" },
-  { name: "LinkedIn B2B Outreach",      status: "active",  leads: 74,  budget: "$950",  ctr: "5.6%" },
-  { name: "SEO Content Push",           status: "draft",   leads: 0,   budget: "$400",  ctr: "—"    },
+  { name: "Google Ads — Q3 Drive",    status: "active", leads: 312, budget: "$1,200", ctr: "4.8%" },
+  { name: "Facebook Lead Gen",         status: "active", leads: 188, budget: "$800",   ctr: "3.2%" },
+  { name: "Instagram Brand Awareness", status: "paused", leads: 95,  budget: "$500",   ctr: "2.1%" },
+  { name: "LinkedIn B2B Outreach",     status: "active", leads: 74,  budget: "$950",   ctr: "5.6%" },
+  { name: "SEO Content Push",          status: "draft",  leads: 0,   budget: "$400",   ctr: "—"    },
 ];
 
 /* ─── ACTIVITY DATA ─── */
 const activities = [
-  { icon: <FaCheckCircle />, color: "emerald", text: "New lead captured via Google Ads",         time: "2 min ago" },
-  { icon: <FaBullhorn />,    color: "indigo",  text: "Campaign \"LinkedIn B2B\" went live",       time: "18 min ago" },
-  { icon: <FaFileAlt />,     color: "sky",     text: "June monthly report generated",             time: "1 hr ago" },
-  { icon: <FaExclamationCircle />, color: "amber", text: "Instagram campaign budget 90% spent",  time: "3 hr ago" },
-  { icon: <FaUsers />,       color: "violet",  text: "125 new leads imported from CSV",           time: "Yesterday" },
-  { icon: <FaClock />,       color: "rose",    text: "Facebook campaign paused — review needed", time: "Yesterday" },
+  { icon: <FaCheckCircle />,       color: "emerald", text: "New lead captured via Google Ads",        time: "2 min ago"  },
+  { icon: <FaBullhorn />,          color: "indigo",  text: 'Campaign "LinkedIn B2B" went live',       time: "18 min ago" },
+  { icon: <FaFileAlt />,           color: "sky",     text: "June monthly report generated",            time: "1 hr ago"   },
+  { icon: <FaExclamationCircle />, color: "amber",   text: "Instagram campaign budget 90% spent",     time: "3 hr ago"   },
+  { icon: <FaUsers />,             color: "violet",  text: "125 new leads imported from CSV",          time: "Yesterday"  },
+  { icon: <FaClock />,             color: "rose",    text: "Facebook campaign paused — review needed", time: "Yesterday"  },
 ];
 
 /* ─── LEAD SOURCES ─── */
 const leadSources = [
-  { source: "Google Ads",   pct: 38, color: "#4f46e5" },
-  { source: "Facebook",     pct: 24, color: "#7c3aed" },
-  { source: "Organic SEO",  pct: 19, color: "#10b981" },
-  { source: "LinkedIn",     pct: 12, color: "#0ea5e9" },
-  { source: "Other",        pct: 7,  color: "#f59e0b" },
+  { source: "Google Ads",  pct: 38, color: "#4f46e5" },
+  { source: "Facebook",    pct: 24, color: "#7c3aed" },
+  { source: "Organic SEO", pct: 19, color: "#10b981" },
+  { source: "LinkedIn",    pct: 12, color: "#0ea5e9" },
+  { source: "Other",       pct: 7,  color: "#f59e0b" },
 ];
 
 /* ─── STATUS BADGE ─── */
 function StatusBadge({ status }) {
   const map = {
-    active: { label: "Active",  cls: "badge-active" },
-    paused: { label: "Paused",  cls: "badge-paused" },
-    draft:  { label: "Draft",   cls: "badge-draft"  },
+    active: { label: "Active", cls: "badge-active" },
+    paused: { label: "Paused", cls: "badge-paused" },
+    draft:  { label: "Draft",  cls: "badge-draft"  },
   };
   const { label, cls } = map[status] || map.draft;
   return <span className={`status-badge ${cls}`}>{label}</span>;
@@ -77,11 +76,12 @@ function StatusBadge({ status }) {
 
 /* ══════════════════════════════════════════ */
 function Dashboard() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [activeNav, setActiveNav] = useState("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const closeSidebar = () => setSidebarOpen(false);
+  const go404 = () => navigate("/404");
 
   return (
     <div className="db-layout">
@@ -94,21 +94,19 @@ function Dashboard() {
       ════════════════════════════════ */}
       <aside className={`db-sidebar ${sidebarOpen ? "db-sidebar--open" : ""}`}>
 
-        {/* Logo placeholder */}
         <div className="sidebar-logo">
           <div className="logo-img-placeholder">
             <img src={logo} alt="" />
           </div>
         </div>
 
-        {/* Nav */}
         <nav className="sidebar-nav">
           <p className="nav-section-label">Main Menu</p>
           {navItems.map((item) => (
             <button
               key={item.id}
               className={`nav-item ${activeNav === item.id ? "nav-item--active" : ""}`}
-              onClick={() => { setActiveNav(item.id); closeSidebar(); }}
+              onClick={() => { setActiveNav(item.id); closeSidebar(); go404(); }}
             >
               <span className="nav-icon">{item.icon}</span>
               <span className="nav-label">{item.label}</span>
@@ -117,13 +115,14 @@ function Dashboard() {
           ))}
         </nav>
 
-        {/* User profile at bottom */}
         <div className="sidebar-user">
           <div className="sidebar-user-avatar" />
           <div className="sidebar-user-info">
             <span><strong>Sign Out</strong></span>
           </div>
-          <button className="sidebar-logout" title="Logout" onClick={()=>navigate("/login")}><FaSignOutAlt /></button>
+          <button className="sidebar-logout" title="Logout" onClick={() => navigate("/login")}>
+            <FaSignOutAlt />
+          </button>
         </div>
       </aside>
 
@@ -140,28 +139,27 @@ function Dashboard() {
 
           <div className="topbar-search">
             <FaSearch />
-            <input type="text" placeholder="Search campaigns, leads…" />
+            <input type="text" placeholder="Search campaigns, leads…" onClick={go404} readOnly />
           </div>
 
           <div className="topbar-actions">
-            <button className="topbar-icon-btn">
+            <button className="topbar-icon-btn" onClick={go404}>
               <FaBell />
               <span className="notif-dot" />
             </button>
-            <div className="topbar-avatar" />
+            <div className="topbar-avatar" onClick={go404} style={{ cursor: "pointer" }} />
           </div>
         </header>
 
         {/* ── PAGE CONTENT ── */}
         <div className="db-page">
 
-          {/* Header */}
           <div className="db-page-header">
             <div>
               <h1>Good morning 👋</h1>
               <p>Here's your marketing performance for June 2026.</p>
             </div>
-            <button className="primary-btn-db">
+            <button className="primary-btn-db" onClick={go404}>
               <FaFileAlt /> Download Report
             </button>
           </div>
@@ -169,12 +167,12 @@ function Dashboard() {
           {/* ── STAT CARDS ── */}
           <div className="db-stat-grid">
             {[
-              { icon: <FaBullhorn />, label: "Active Campaigns", value: "24",    delta: "+3",  up: true,  color: "indigo" },
-              { icon: <FaUsers />,    label: "Total Leads",       value: "1,250", delta: "+128",up: true,  color: "emerald"},
-              { icon: <FaChartLine />,label: "Conversion Rate",   value: "78%",   delta: "+5%", up: true,  color: "violet" },
-              { icon: <FaDollarSign />,label: "Revenue",          value: "$12.5K",delta: "−$1.2K", up: false, color: "sky"},
+              { icon: <FaBullhorn />,    label: "Active Campaigns", value: "24",     delta: "+3",     up: true,  color: "indigo"  },
+              { icon: <FaUsers />,       label: "Total Leads",       value: "1,250",  delta: "+128",   up: true,  color: "emerald" },
+              { icon: <FaChartLine />,   label: "Conversion Rate",   value: "78%",    delta: "+5%",    up: true,  color: "violet"  },
+              { icon: <FaDollarSign />,  label: "Revenue",           value: "$12.5K", delta: "−$1.2K", up: false, color: "sky"     },
             ].map((s, i) => (
-              <div key={i} className={`db-stat-card db-stat-card--${s.color}`}>
+              <div key={i} className={`db-stat-card db-stat-card--${s.color}`} onClick={go404} style={{ cursor: "pointer" }}>
                 <div className="stat-icon-wrap">{s.icon}</div>
                 <div className="stat-body">
                   <span className="stat-label">{s.label}</span>
@@ -190,11 +188,10 @@ function Dashboard() {
           {/* ── CAMPAIGNS TABLE + ACTIVITY ── */}
           <div className="db-mid-grid">
 
-            {/* Campaigns table */}
             <div className="db-card db-card--wide">
               <div className="card-header">
                 <h3>Recent Campaigns</h3>
-                <button className="card-action">View All <FaChartLine /></button>
+                <button className="card-action" onClick={go404}>View All <FaChartLine /></button>
               </div>
               <div className="table-wrap">
                 <table className="db-table">
@@ -216,7 +213,7 @@ function Dashboard() {
                         <td>{c.leads}</td>
                         <td>{c.budget}</td>
                         <td>{c.ctr}</td>
-                        <td><button className="row-action"><FaEllipsisV /></button></td>
+                        <td><button className="row-action" onClick={go404}><FaEllipsisV /></button></td>
                       </tr>
                     ))}
                   </tbody>
@@ -224,11 +221,10 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Activity feed */}
             <div className="db-card">
               <div className="card-header">
                 <h3>Recent Activity</h3>
-                <button className="card-action">Clear All</button>
+                <button className="card-action" onClick={go404}>Clear All</button>
               </div>
               <ul className="activity-list">
                 {activities.map((a, i) => (
@@ -244,10 +240,9 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* ── LEAD SOURCES + QUICK TASKS ── */}
+          {/* ── LEAD SOURCES + QUICK TASKS + TOP CHANNELS ── */}
           <div className="db-bottom-grid">
 
-            {/* Lead sources */}
             <div className="db-card">
               <div className="card-header">
                 <h3>Lead Sources</h3>
@@ -257,10 +252,7 @@ function Dashboard() {
                   <div key={i} className="lead-source-row">
                     <span className="ls-label">{l.source}</span>
                     <div className="ls-bar-wrap">
-                      <div
-                        className="ls-bar"
-                        style={{ width: `${l.pct}%`, background: l.color }}
-                      />
+                      <div className="ls-bar" style={{ width: `${l.pct}%`, background: l.color }} />
                     </div>
                     <span className="ls-pct">{l.pct}%</span>
                   </div>
@@ -268,11 +260,10 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Quick tasks */}
             <div className="db-card">
               <div className="card-header">
                 <h3>Quick Tasks</h3>
-                <button className="card-action">+ Add Task</button>
+                <button className="card-action" onClick={go404}>+ Add Task</button>
               </div>
               <ul className="task-list">
                 {[
@@ -282,27 +273,28 @@ function Dashboard() {
                   { done: false, text: "Update landing page copy" },
                   { done: false, text: "Schedule June email newsletter" },
                 ].map((t, i) => (
-                  <li key={i} className={`task-item ${t.done ? "task-done" : ""}`}>
-                    <span className="task-check">{t.done ? <FaCheckCircle /> : <span className="task-circle" />}</span>
+                  <li key={i} className={`task-item ${t.done ? "task-done" : ""}`} onClick={go404} style={{ cursor: "pointer" }}>
+                    <span className="task-check">
+                      {t.done ? <FaCheckCircle /> : <span className="task-circle" />}
+                    </span>
                     <span>{t.text}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Top performing channels */}
             <div className="db-card">
               <div className="card-header">
                 <h3>Top Channels</h3>
               </div>
               <div className="channels-list">
                 {[
-                  { name: "Google Ads",  revenue: "$5,400", roas: "4.5×", icon: "G" },
-                  { name: "Facebook",    revenue: "$3,200", roas: "3.2×", icon: "f" },
-                  { name: "Email",       revenue: "$2,100", roas: "6.8×", icon: "✉" },
-                  { name: "LinkedIn",    revenue: "$1,800", roas: "2.9×", icon: "in"},
+                  { name: "Google Ads", revenue: "$5,400", roas: "4.5×", icon: "G"  },
+                  { name: "Facebook",   revenue: "$3,200", roas: "3.2×", icon: "f"  },
+                  { name: "Email",      revenue: "$2,100", roas: "6.8×", icon: "✉"  },
+                  { name: "LinkedIn",   revenue: "$1,800", roas: "2.9×", icon: "in" },
                 ].map((ch, i) => (
-                  <div key={i} className="channel-row">
+                  <div key={i} className="channel-row" onClick={go404} style={{ cursor: "pointer" }}>
                     <div className="channel-logo">{ch.icon}</div>
                     <div className="channel-info">
                       <strong>{ch.name}</strong>

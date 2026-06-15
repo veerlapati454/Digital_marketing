@@ -7,10 +7,8 @@
   left: 0;
   right: 0;
   z-index: 1000;
-
-  background: #0d0c18; /* solid color */
+  background: #0d0c18;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
   transition: box-shadow 0.35s ease;
 }
 
@@ -33,7 +31,7 @@
 
 
 /* ═══════════════════════════════════════════════
-   LOGO — larger, animated
+   LOGO
 ═══════════════════════════════════════════════ */
 .header__logo {
   display: flex;
@@ -49,7 +47,7 @@
 }
 
 .header__logo-img {
-  height: 200px;         /* ↑ increased from typical ~28px */
+  height: 200px;
   width: 200px;
   display: block;
   object-fit: contain;
@@ -75,7 +73,7 @@
   display: flex;
   align-items: center;
   gap: 2.5rem;
-  margin-left: auto;   /* pushes everything to the far right */
+  margin-left: auto;
 }
 
 
@@ -113,7 +111,6 @@
   font-weight: 500;
 }
 
-/* animated underline */
 .header__nav-underline {
   position: absolute;
   bottom: 4px;
@@ -237,7 +234,6 @@
   transform-origin: center;
 }
 
-/* X morph */
 .header__hamburger--open .header__bar:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }
@@ -297,7 +293,6 @@
               background 0.2s ease,
               border-color 0.2s ease,
               transform 0.2s ease;
-  /* staggered slide-in */
   animation: none;
 }
 
@@ -307,14 +302,8 @@
 }
 
 @keyframes slideInLink {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0);    }
 }
 
 .header__drawer-link:hover {
@@ -410,6 +399,12 @@
   .header__hamburger {
     display: flex;
   }
+
+  /* ── LOGO FIX for mobile ── */
+  .header__logo-img {
+    height: 130px;
+    width: 130px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -419,7 +414,8 @@
   }
 
   .header__logo-img {
-    height: 36px;
+    height: 110px;
+    width: 110px;
   }
 
   .header__drawer {

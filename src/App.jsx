@@ -10,6 +10,10 @@ import Dashboard from "./Component/Dashboard/Dashboard";
 import AdminDashboard from "./Component/AdminDasboard/AdminDashboard";
 
 import NotFound from "./Component/NotFound/NotFound";
+import Reviews from "./Component/Reviews/Reviews";
+import Results from "./Component/Results/Results";
+import Prices from "./Component/Prices/Prices";
+import Services from "./Component/Services/services";
 
 function App() {
   return (
@@ -19,6 +23,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/service" element={<Services />} />
+          <Route path="/price" element={<Prices />} />
+          <Route path="/result" element={<Results />} />
+          <Route path="/review" element={<Reviews />} />
+
         </Route>
 
         <Route path="/dashboard" element={<Dashboard />} />

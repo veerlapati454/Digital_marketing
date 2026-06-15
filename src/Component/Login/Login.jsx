@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaGoogle, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaEye,
+  FaEyeSlash,
+  FaGoogle,
+  FaLinkedinIn,
+} from "react-icons/fa";
 import { HiArrowLeft } from "react-icons/hi";
 import "./Login.css";
 
@@ -12,13 +17,38 @@ function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const [emailWarning, setEmailWarning] = useState("");
+  const [passwordWarning, setPasswordWarning] = useState("");
+
+  useEffect(() => {
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+    if (email === "") {
+      setEmailWarning("");
+    } else if (!gmailRegex.test(email)) {
+      setEmailWarning("Only Gmail addresses are allowed");
+    } else {
+      setEmailWarning("");
+    }
+  }, [email]);
+
+  useEffect(() => {
+    if (password === "") {
+      setPasswordWarning("");
+    } else if (password.length < 6) {
+      setPasswordWarning("Password must be at least 6 characters");
+    } else {
+      setPasswordWarning("");
+    }
+  }, [password]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
     if (!gmailRegex.test(email)) {
-      alert("Please enter a valid Gmail address");
+      alert("Only Gmail addresses are allowed");
       return;
     }
 
@@ -29,7 +59,6 @@ function Login() {
 
     localStorage.setItem("role", role);
 
-
     if (role === "admin") {
       navigate("/admin-dashboard");
     } else {
@@ -39,21 +68,19 @@ function Login() {
 
   return (
     <div className="login-page">
-
       <div className="login-card">
-
         <Link to="/" className="back-btn">
           <HiArrowLeft />
           Back
         </Link>
 
         <h1>Welcome Back</h1>
+
         <p className="subtitle">
           Login to continue managing your campaigns.
         </p>
 
         <div className="role-selector">
-
           <button
             type="button"
             className={role === "user" ? "active-role" : ""}
@@ -69,11 +96,9 @@ function Login() {
           >
             Admin Login
           </button>
-
         </div>
 
         <form onSubmit={handleSubmit}>
-
           <div className="input-group">
             <label>Email Address</label>
 
@@ -84,6 +109,12 @@ function Login() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
+
+            {emailWarning && (
+              <small className="warning-text">
+                {emailWarning}
+              </small>
+            )}
           </div>
 
           <div className="input-group">
@@ -105,39 +136,38 @@ function Login() {
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
+
+            {passwordWarning && (
+              <small className="warning-text">
+                {passwordWarning}
+              </small>
+            )}
           </div>
 
           <button type="submit" className="login-btn">
             Login
           </button>
-
         </form>
 
-        <div className="divider">
-          <span>OR</span>
-        </div>
+      
 
         <div className="social-login">
-
-          <button className="social-btn">
+          <Link to="/404" className="social-btn">
             <FaGoogle />
             Continue with Google
-          </button>
+          </Link>
 
-          <button className="social-btn">
+          <Link to="/404" className="social-btn">
             <FaLinkedinIn />
             Continue with LinkedIn
-          </button>
-
+          </Link>
         </div>
 
         <p className="signup-link">
           Don't have an account?
           <Link to="/signup"> Sign Up</Link>
         </p>
-
       </div>
-
     </div>
   );
 }

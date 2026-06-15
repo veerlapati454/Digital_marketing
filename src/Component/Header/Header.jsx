@@ -6,26 +6,48 @@ import logo from "../../assets/stackly_logo.webp";
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeAnchor, setActiveAnchor] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 80);
+      if (window.scrollY < 80) setActiveAnchor("");
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
+    const ids = ["service", "result", "price", "review"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((e) => e.isIntersecting);
+        if (visible) setActiveAnchor("#" + visible.target.id);
+      },
+      { threshold: 0.35 }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   const handleNavClick = () => setMenuOpen(false);
 
   const navLinks = [
-    { label: "Home",     to: "/",             type: "route"  },
-    { label: "Services", to: "#services",     type: "anchor" },
-    { label: "Results",  to: "#stats",        type: "anchor" },
-    { label: "Pricing",  to: "#pricing",      type: "anchor" },
-    { label: "Reviews",  to: "#testimonials", type: "anchor" },
+    { label: "Home",     to: "/",         type: "route"  },
+    { label: "Services", to: "#service",  type: "anchor" },
+    { label: "Results",  to: "#result",   type: "anchor" },
+    { label: "Pricing",  to: "#price",    type: "anchor" },
+    { label: "Reviews",  to: "#review",   type: "anchor" },
   ];
 
   return (
@@ -68,7 +90,7 @@ function Header() {
                 <a
                   key={label}
                   href={to}
-                  className="header__nav-link"
+                  className={`header__nav-link${activeAnchor === to ? " header__nav-link--active" : ""}`}
                   onClick={handleNavClick}
                 >
                   {label}
@@ -131,7 +153,7 @@ function Header() {
               <a
                 key={label}
                 href={to}
-                className="header__drawer-link"
+                className={`header__drawer-link${activeAnchor === to ? " header__drawer-link--active" : ""}`}
                 onClick={handleNavClick}
                 style={{ "--i": i }}
               >

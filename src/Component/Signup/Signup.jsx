@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  FaGoogle,
-  FaLinkedinIn,
-  FaEye,
-  FaEyeSlash,
-} from "react-icons/fa";
+import { FaGoogle, FaLinkedinIn, FaEye, FaEyeSlash } from "react-icons/fa";
 import { HiArrowLeft } from "react-icons/hi";
 import "./Signup.css";
 
@@ -16,30 +11,25 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [termsError, setTermsError] = useState("");
 
   const handleFullName = (e) => {
-    const value = e.target.value.replace(/[^A-Za-z\s]/g, "");
-    setFullName(value);
+    setFullName(e.target.value.replace(/[^A-Za-z\s]/g, ""));
   };
 
   const handleUsername = (e) => {
-    const value = e.target.value.replace(/[^A-Za-z]/g, "");
-    setUsername(value);
+    setUsername(e.target.value.replace(/[^A-Za-z]/g, ""));
   };
 
   const handleEmailChange = (e) => {
     const value = e.target.value.trim();
-
     setEmail(value);
-
     const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-
     if (value === "") {
       setEmailError("");
     } else if (!gmailRegex.test(value)) {
@@ -47,6 +37,11 @@ function Signup() {
     } else {
       setEmailError("");
     }
+  };
+
+  const handleTermsChange = (e) => {
+    setTermsAccepted(e.target.checked);
+    if (e.target.checked) setTermsError("");
   };
 
   const handleSubmit = (e) => {
@@ -57,28 +52,18 @@ function Signup() {
       return;
     }
 
-    if (password.length < 8) {
-      alert("Password must contain at least 8 characters");
-      return;
-    }
-
-    if (!/[A-Z]/.test(password)) {
-      alert("Password must contain at least one uppercase letter");
-      return;
-    }
-
-    if (!/[0-9]/.test(password)) {
-      alert("Password must contain at least one number");
-      return;
-    }
-
-    if (!/[!@#$%^&*]/.test(password)) {
-      alert("Password must contain at least one special character");
+    if (password.length < 6) {
+      alert("Password must contain at least 6 characters");
       return;
     }
 
     if (password !== confirmPassword) {
       alert("Passwords do not match");
+      return;
+    }
+
+    if (!termsAccepted) {
+      setTermsError("You must accept the Terms & Conditions to register.");
       return;
     }
 
@@ -97,13 +82,10 @@ function Signup() {
 
         <h1>Create Account</h1>
 
-        
-
         <form onSubmit={handleSubmit}>
 
           <div className="input-group">
             <label>Full Name</label>
-
             <input
               type="text"
               placeholder="Enter Full Name"
@@ -115,7 +97,6 @@ function Signup() {
 
           <div className="input-group">
             <label>Username</label>
-
             <input
               type="text"
               placeholder="Enter Username"
@@ -127,7 +108,6 @@ function Signup() {
 
           <div className="input-group">
             <label>Email Address</label>
-
             <input
               type="email"
               placeholder="example@gmail.com"
@@ -136,17 +116,11 @@ function Signup() {
               className={emailError ? "error" : ""}
               required
             />
-
-            {emailError && (
-              <span className="error-message">
-                {emailError}
-              </span>
-            )}
+            {emailError && <span className="error-message">{emailError}</span>}
           </div>
 
           <div className="input-group">
             <label>Password</label>
-
             <div className="password-wrapper">
               <input
                 type={showPassword ? "text" : "password"}
@@ -155,11 +129,7 @@ function Signup() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-
-              <span
-                className="eye-icon"
-                onClick={() => setShowPassword(!showPassword)}
-              >
+              <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
@@ -167,7 +137,6 @@ function Signup() {
 
           <div className="input-group">
             <label>Confirm Password</label>
-
             <div className="password-wrapper">
               <input
                 type={showConfirmPassword ? "text" : "password"}
@@ -176,20 +145,27 @@ function Signup() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
-
-              <span
-                className="eye-icon"
-                onClick={() =>
-                  setShowConfirmPassword(!showConfirmPassword)
-                }
-              >
-                {showConfirmPassword ? (
-                  <FaEyeSlash />
-                ) : (
-                  <FaEye />
-                )}
+              <span className="eye-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
+          </div>
+
+          {/* Terms & Conditions */}
+          <div className="input-group terms-group">
+            <label className="terms-label">
+              <input
+                type="checkbox"
+                checked={termsAccepted}
+                onChange={handleTermsChange}
+              />
+              <span className="checkmark"></span>
+              I agree to the{" "}
+              <Link to="/terms" className="terms-link">
+                Terms & Conditions
+              </Link>
+            </label>
+            {termsError && <span className="error-message">{termsError}</span>}
           </div>
 
           <button className="signup-btn" type="submit">
@@ -198,22 +174,17 @@ function Signup() {
 
         </form>
 
-        <div className="divider">
-          <span>OR</span>
-        </div>
+        
 
         <div className="social-login">
-
-          <button className="social-btn">
+          <button className="social-btn" onClick={() => navigate("/404")}>
             <FaGoogle />
             Continue with Google
           </button>
-
-          <button className="social-btn">
+          <button className="social-btn" onClick={() => navigate("/404")}>
             <FaLinkedinIn />
             Continue with LinkedIn
           </button>
-
         </div>
 
         <p className="login-link">
