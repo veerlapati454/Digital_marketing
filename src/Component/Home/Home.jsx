@@ -28,6 +28,11 @@ import b3 from "../../assets/b3.webp";
 import b4 from "../../assets/b4.webp";
 import b5 from "../../assets/b5.webp";
 import b6 from "../../assets/b6.webp";
+import b7 from "../../assets/b7.webp";
+import b8 from "../../assets/b8.webp";
+import b9 from "../../assets/b9.webp";
+import b10 from "../../assets/b10.webp";
+
 import { useNavigate } from "react-router-dom";
 
 /* ─── Scroll reveal hook ─── */
@@ -291,31 +296,33 @@ const goTo404 = () => {
 </section>
 
       {/* ══ 5. PROCESS ══ */}
-      <section id="process" className="process">
-        <div className="container">
-          <div ref={procRef} className={`section-header ${procVisible ? "reveal" : ""}`}>
-            <span className="eyebrow">Our Process</span>
-            <h2 className="section-title">From Zero to Growth Engine</h2>
-            <p className="section-sub">A repeatable 4-step system refined across 500+ projects.</p>
-          </div>
+     <section id="process" className="process">
+  <div className="container">
+    <div ref={procRef} className={`section-header ${procVisible ? "reveal" : ""}`}>
+      <span className="eyebrow">Our Process</span>
+      <h2 className="section-title">From Zero to Growth Engine</h2>
+      <p className="section-sub">A repeatable 4-step system refined across 500+ projects.</p>
+    </div>
 
-          <div className={`process-steps ${procVisible ? "reveal stagger" : ""}`}>
-            {[
-              { step: "01", icon: <FaSearch />,    title: "Audit & Discover", desc: "We map your funnel, benchmark competitors, and surface the highest-leverage growth levers in your market." },
-              { step: "02", icon: <FaLightbulb />, title: "Strategise",        desc: "A custom 90-day roadmap with prioritised experiments, channel mix, and forecasted outcomes." },
-              { step: "03", icon: <FaCogs />,       title: "Execute",           desc: "Our specialists run campaigns, publish content, and optimise daily—so you don't have to." },
-              { step: "04", icon: <FaChartLine />,  title: "Report & Scale",    desc: "Weekly dashboards and monthly strategy calls. We double down on what works and cut what doesn't." },
-            ].map((p) => (
-              <div key={p.step} className="process-step">
-                <div className="step-number">{p.step}</div>
-                <div className="step-icon">{p.icon}</div>
-                <h3>{p.title}</h3>
-                <p>{p.desc}</p>
-              </div>
-            ))}
+    <div className={`process-steps ${procVisible ? "reveal stagger" : ""}`}>
+      {[
+        { step: "01", icon: <FaSearch />,    title: "Audit & Discover", desc: "We map your funnel, benchmark competitors, and surface the highest-leverage growth levers in your market.", img: b7 },
+        { step: "02", icon: <FaLightbulb />, title: "Strategise",        desc: "A custom 90-day roadmap with prioritised experiments, channel mix, and forecasted outcomes.", img: b8 },
+        { step: "03", icon: <FaCogs />,      title: "Execute",           desc: "Our specialists run campaigns, publish content, and optimise daily—so you don't have to.", img: b9 },
+        { step: "04", icon: <FaChartLine />, title: "Report & Scale",    desc: "Weekly dashboards and monthly strategy calls. We double down on what works and cut what doesn't.", img: b10 },
+      ].map((p) => (
+        <div key={p.step} className="process-step">
+          <div className="process-step-img-wrap">
+            <img src={p.img} alt={p.title} className="process-step-img" />
+            <div className="process-step-num-overlay">{p.step}</div>
           </div>
+          <h3>{p.title}</h3>
+          <p>{p.desc}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* ══ 6. TESTIMONIALS ══ */}
       <section id="testimonials" className="testimonials">
