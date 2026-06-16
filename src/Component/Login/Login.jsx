@@ -74,7 +74,7 @@ function Login() {
           Back
         </Link>
 
-        <h1>Welcome Back</h1>
+        <h1>Welcome</h1>
 
         <p className="subtitle">
           Login to continue managing your campaigns.

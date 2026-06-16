@@ -22,6 +22,12 @@ import {
 } from "react-icons/fa";
 import "./Home.css";
 import hero from "../../assets/h6.webp";
+import b1 from "../../assets/b1.webp";
+import b2 from "../../assets/b2.webp";
+import b3 from "../../assets/b3.webp";
+import b4 from "../../assets/b4.webp";
+import b5 from "../../assets/b5.webp";
+import b6 from "../../assets/b6.webp";
 import { useNavigate } from "react-router-dom";
 
 /* ─── Scroll reveal hook ─── */
@@ -144,10 +150,7 @@ const goTo404 = () => {
           </div>
         </div>
 
-        {/* scroll cue */}
-        <div className="hero-scroll-cue" aria-hidden="true">
-          <span />
-        </div>
+        
       </section>
 
       {/* ══ LOGOS BAR ══ */}
@@ -215,68 +218,77 @@ const goTo404 = () => {
         </div>
       </section>
 
-      {/* ══ 4. FACILITIES ══ */}
-      <section id="facilities" className="facilities">
-        <div className="container">
-          <div ref={facRef} className={`section-header ${facVisible ? "reveal" : ""}`}>
-            <span className="eyebrow">Why Choose Us</span>
-            <h2 className="section-title">Everything You Need, Nothing You Don't</h2>
-            <p className="section-sub">
-              Infrastructure, talent, and tooling that lets us move fast without breaking things.
-            </p>
-          </div>
+     {/* ══ 4. FACILITIES ══ */}
+<section id="facilities" className="facilities">
+  <div className="container">
+    <div ref={facRef} className={`section-header ${facVisible ? "reveal" : ""}`}>
+      <span className="eyebrow">Why Choose Us</span>
+      <h2 className="section-title">Everything You Need, Nothing You Don't</h2>
+      <p className="section-sub">
+        Infrastructure, talent, and tooling that lets us move fast without breaking things.
+      </p>
+    </div>
 
-          <div className={`facilities-grid ${facVisible ? "reveal stagger" : ""}`}>
-            {[
-              {
-                icon: <FaBolt />,
-                title: "Real-Time Analytics",
-                desc: "Live dashboards updated every hour. You always know exactly what's working—no waiting for end-of-month reports.",
-                stat: "< 1 hr latency",
-              },
-              {
-                icon: <FaHeadset />,
-                title: "Dedicated Support",
-                desc: "A named account manager available on Slack. Direct line to the strategist running your campaigns, not a ticketing queue.",
-                stat: "2 hr response SLA",
-              },
-              {
-                icon: <FaGlobe />,
-                title: "Global Infrastructure",
-                desc: "Campaign management across 40+ markets with localised copy, bidding, and compliance built in from day one.",
-                stat: "40+ markets",
-              },
-              {
-                icon: <FaLock />,
-                title: "Data Security & Compliance",
-                desc: "GDPR, CCPA, and ISO 27001-aligned processes. Your customer data stays yours—never shared, never sold.",
-                stat: "ISO 27001 aligned",
-              },
-              {
-                icon: <FaUsers />,
-                title: "In-House Creative Studio",
-                desc: "Copywriters, designers, and video editors under one roof. No outsourcing, no briefing lag—just fast, on-brand output.",
-                stat: "12-person studio",
-              },
-              {
-                icon: <FaAward />,
-                title: "Proven Playbooks",
-                desc: "500+ projects refined into repeatable systems. We bring battle-tested frameworks to your campaigns from day one.",
-                stat: "500+ projects",
-              },
-            ].map((f, i) => (
-              <div key={i} className="facility-card">
-                <div className="facility-icon-wrap">{f.icon}</div>
-                <div className="facility-body">
-                  <h3>{f.title}</h3>
-                  <p>{f.desc}</p>
-                  <span className="facility-stat">{f.stat}</span>
-                </div>
-              </div>
-            ))}
+    <div className={`facilities-grid ${facVisible ? "reveal stagger" : ""}`}>
+      {[
+        {
+          icon: <FaBolt />,
+          title: "Real-Time Analytics",
+          desc: "Live dashboards updated every hour. You always know exactly what's working—no waiting for end-of-month reports.",
+          stat: "< 1 hr latency",
+          img: b1,   // ← swap with your actual imports
+        },
+        {
+          icon: <FaHeadset />,
+          title: "Dedicated Support",
+          desc: "A named account manager available on Slack. Direct line to the strategist running your campaigns, not a ticketing queue.",
+          stat: "2 hr response SLA",
+          img: b2,
+        },
+        {
+          icon: <FaGlobe />,
+          title: "Global Infrastructure",
+          desc: "Campaign management across 40+ markets with localised copy, bidding, and compliance built in from day one.",
+          stat: "40+ markets",
+          img: b3,
+        },
+        {
+          icon: <FaLock />,
+          title: "Data Security & Compliance",
+          desc: "GDPR, CCPA, and ISO 27001-aligned processes. Your customer data stays yours—never shared, never sold.",
+          stat: "ISO 27001 aligned",
+          img: b4,
+        },
+        {
+          icon: <FaUsers />,
+          title: "In-House Creative Studio",
+          desc: "Copywriters, designers, and video editors under one roof. No outsourcing, no briefing lag—just fast, on-brand output.",
+          stat: "12-person studio",
+          img: b5,
+        },
+        {
+          icon: <FaAward />,
+          title: "Proven Playbooks",
+          desc: "500+ projects refined into repeatable systems. We bring battle-tested frameworks to your campaigns from day one.",
+          stat: "500+ projects",
+          img: b6,
+        },
+      ].map((f, i) => (
+        <div key={i} className="facility-card">
+          <div className="facility-card-img-wrap">
+            <img src={f.img} alt={f.title} className="facility-card-img" />
+          </div>
+          <div className="facility-icon-wrap">{f.icon}</div>
+          <div className="facility-body">
+            <h3>{f.title}</h3>
+            <p>{f.desc}</p>
+            <span className="facility-stat">{f.stat}</span>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* ══ 5. PROCESS ══ */}
       <section id="process" className="process">
@@ -324,7 +336,6 @@ const goTo404 = () => {
                 <div className="stars">{[...Array(t.stars)].map((_, s) => <FaStar key={s} />)}</div>
                 <p className="testimonial-quote">"{t.quote}"</p>
                 <div className="testimonial-author">
-                  <div className="author-avatar" />
                   <div>
                     <strong>{t.name}</strong>
                     <span>{t.role}</span>

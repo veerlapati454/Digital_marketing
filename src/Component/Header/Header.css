@@ -419,7 +419,11 @@
   }
 
   .header__drawer {
-    inset-top: 64px;
+    inset: 64px 0 0 0; /* ← fix: was inset-top: 64px (invalid), now correct */
     padding: 1.5rem 1rem 2rem;
+  }
+
+  .header__backdrop {
+    inset: 64px 0 0 0; /* ← also fix backdrop to match */
   }
 }

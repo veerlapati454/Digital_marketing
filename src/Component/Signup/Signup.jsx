@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaLinkedinIn, FaEye, FaEyeSlash } from "react-icons/fa";
 import { HiArrowLeft } from "react-icons/hi";
 import "./Signup.css";
+import toast from 'react-hot-toast';
+
 
 function Signup() {
   const navigate = useNavigate();
@@ -67,8 +69,14 @@ function Signup() {
       return;
     }
 
-    alert("Account Created Successfully");
+    toast.success("Account created! Redirecting to login...", {
+    duration: 2000,
+  });
+
+  setTimeout(() => {
     navigate("/login");
+  }, 2000);
+
   };
 
   return (

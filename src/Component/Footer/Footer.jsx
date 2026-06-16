@@ -78,6 +78,7 @@ function Footer() {
 
           <p>support@stackly.com</p>
           <p>+91 9876543210</p>
+          <p>Hyderabad,India.</p>
 
           <div className="footer-socials">
 
